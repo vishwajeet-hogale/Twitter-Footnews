@@ -1,0 +1,21 @@
+{
+  "name": "Twitter-Footnews",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index",
+    "dev" : "nodemon server/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishwajeet-hogale/Twitter-Footnews.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vishwajeet-hogale/Twitter-Footnews/issues"
+  },
+  "homepage": "https://github.com/vishwajeet-hogale/Twitter-Footnews#readme"
+}
