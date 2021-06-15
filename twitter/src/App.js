@@ -4,15 +4,19 @@ import React,{useState,useEffect} from 'react';
 function App() {
   const [tweets, settweets] = useState([]);
   useEffect(()=>{
-    loadData();
+    const setID = setInterval(()=>{
+      loadData();
+    },1000);
+    return () => clearInterval(setID);
   },[]);
+
   const loadData = async () =>{
     const response = await fetch("http://127.0.0.1:5000/fetch");
     const data = await response.json();
     console.log(data.data);
     let all = []
     data.data.forEach(item => {all.push(item["text"])});
-    console.log(all);
+    console.log(all.reverse());
     settweets(all);
 
   }
