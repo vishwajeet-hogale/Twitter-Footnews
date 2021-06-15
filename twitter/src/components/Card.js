@@ -26,7 +26,9 @@ const useStyles = makeStyles({
 export default function OutlinedCard() {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
-
+  // componentDidMount(){
+  //   this
+  // }
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
