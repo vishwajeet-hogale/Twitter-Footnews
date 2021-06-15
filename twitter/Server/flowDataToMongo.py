@@ -29,30 +29,35 @@ access_token = "1380563468495904769-XyEXZ8RR6NZDKwzuN11KDzJcvx14cV"
 access_token_secret = "0khUTnzK2crKZrUDVKgkF6D1Un5B0lAfPkVIP4Hp6qKrx"
 consumer_key = "f4DyH3YGd58RCc6qDkSiCxdhK"
 consumer_secret = "bqVsAXoYAUzf6T7qG6ra2TTCM0rmEiNuaBDNwDEgoHQHWcN1gE"
-
-# Create the class that will handle the tweet stream
 class StdOutListener(StreamListener):
-      
-    def on_data(self, data):   
-        # print(type(data))
-        tweet = json.loads(data)
-        twitter_data = pymongo.collection.Collection(db, 'twitter')
-        twitter_data.insert_one(tweet)
-        time.sleep(1)
-        print(tweet["text"])
-        return True
         
+        def on_data(self, data):   
+            # print(type(data))
+            tweet = json.loads(data)
+            twitter_data = pymongo.collection.Collection(db, 'twitter')
+            twitter_data.insert_one(tweet)
+            time.sleep(1)
+            print(tweet["text"])
+            return True
+            
 
-    def on_error(self, status):
-        print(status)
-
-
+        def on_error(self, status):
+            print(status)
+app.route("/")
+def get_data():
+    
+    return {"All tweets are being heard here"}
+app.route("/fetch_new",methods=["GET"])
+def get_recent_data():
+    twitter_data = pymongo.collection.Collection(db, 'twitter')
+    all1 = twitter_data.find().sort({id:1})
+    return all1
 if __name__ == '__main__':  
 # Handle Twitter authetification and the connection to Twitter Streaming API
+    
     l = StdOutListener()
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth, l)
     tracklist = ["Football","Euro 2020","Euro 2021"]
     stream.filter(track=tracklist)
-
